@@ -14,6 +14,7 @@ function getDataFormlar(id) {
     })
 }
 
+// Arama fonksiyonu
 function searchRehber(search) {
   fetch('http://localhost/vue_dersleri/rehber.api.php?method=get.rehber.search&search=' + search)
     //fetch('http://localhost/rehber/public/api/api.php')
