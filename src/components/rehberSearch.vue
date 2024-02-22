@@ -4,13 +4,14 @@ import { ref, reactive } from 'vue'
 const CEVAP = reactive({ rehber: [] })
 const search = ref('')
 const refFormlar = ref(null)
-
+const formGoster = ref(false)
 
 function getDataFormlar(id) {
   fetch('http://localhost/vue_dersleri/api.php?method=get.formlar&id=' + id)
     .then((response) => response.json())
     .then((data) => {
       refFormlar.value = data
+      formGoster.value = true
     })
 }
 
@@ -36,10 +37,12 @@ function searchRehber(search) {
     </article>
   </div>
   <article data-theme="light">
+    <h4>Tek Kişi</h4>
     <tek-kisi v-for="i in CEVAP.rehber" :key="i.id" islem="select" id=i.id :ad=i.ad :telefon=i.telefon>
     </tek-kisi>
   </article>
   <article data-theme="light" v-if="CEVAP.rehber.length > 0">
+    <h4>Liste</h4>
     <div clas="overflow-auto">
       <table role="grid" class="striped">
         <thead data-theme="light">
@@ -64,12 +67,13 @@ function searchRehber(search) {
       </table>
     </div>
   </article>
-  <article>
+  <article data-theme="light" v-if="formGoster.valueOf(True)">
+    <pre>{{ refFormlar }}</pre>
 
     <table role="grid" class="stripped">
       <thead>
         <tr>
-          <th nowrap>ID</th>
+          <th nowrap>Formlar</th>
           <th nowrap>Ad Soyad</th>
           <th nowrap>TC Kimlik</th>
           <th nowrap>E-posta</th>
