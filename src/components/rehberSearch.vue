@@ -1,10 +1,14 @@
 <script setup>
-import { ref, reactive } from 'vue'
+import { ref, reactive, computed } from 'vue'
 
 const CEVAP = reactive({ rehber: [] })
 const search = ref('')
 const refFormlar = ref(null)
 const formGoster = ref(false)
+
+const SonucAdedi = computed(() => {
+  return CEVAP.rehber.length + ' Adet kayıt bulundu.'
+})
 
 function getDataFormlar(id) {
   fetch('http://localhost/vue_dersleri/api.php?method=get.formlar&id=' + id)
@@ -22,11 +26,12 @@ function searchRehber(search) {
     .then((response) => response.json())
     .then((data) => (CEVAP.rehber = data))
   console.log(CEVAP.rehber)
+
 }
 
 </script>
 <template>
-  <!-- <pre>{{ CEVAP }} {{ CEVAP.rehber.length }} </pre> -->
+  <pre>{{ CEVAP }} Adet:{{ CEVAP.rehber.length }} </pre>
   <div class="container">
     <h3>Arama</h3>
     <article data-theme="light">
@@ -34,6 +39,7 @@ function searchRehber(search) {
         <input type="search" placeholder="İsim" v-model="search" />
         <input type="submit" value="Ara" />
       </form>
+      <small>{{ SonucAdedi }}</small>
     </article>
   </div>
   <article data-theme="light">
@@ -68,7 +74,7 @@ function searchRehber(search) {
     </div>
   </article>
   <article data-theme="light" v-if="formGoster.valueOf(True)">
-    <pre>{{ refFormlar }}</pre>
+    <!-- <pre>{{ refFormlar }}</pre> -->
 
     <table role="grid" class="stripped">
       <thead>
