@@ -7,6 +7,9 @@ const refFormlar = ref(null)
 const formGoster = ref(false)
 
 const SonucAdedi = computed(() => {
+  if (CEVAP.rehber.length == 0) {
+    return 'Aramak istediğiniz ismi giriniz..'
+  }
   return CEVAP.rehber.length + ' Adet kayıt bulundu.'
 })
 
@@ -31,7 +34,7 @@ function searchRehber(search) {
 
 </script>
 <template>
-  <pre>{{ CEVAP }} Adet:{{ CEVAP.rehber.length }} </pre>
+  <!-- <pre>{{ CEVAP }} Adet:{{ CEVAP.rehber.length }} </pre> -->
   <div class="container">
     <h3>Arama</h3>
     <article data-theme="light">
@@ -39,7 +42,7 @@ function searchRehber(search) {
         <input type="search" placeholder="İsim" v-model="search" />
         <input type="submit" value="Ara" />
       </form>
-      <small>{{ SonucAdedi }}</small>
+      <small> {{ SonucAdedi }}</small>
     </article>
   </div>
   <article data-theme="light">

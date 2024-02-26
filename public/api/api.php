@@ -57,13 +57,21 @@ switch ($islem) {
     break;
     
     default:
-    //case 'get.rehber':
+    
+    // $ID = (isset($_GET['id'])) ? $_GET['id'] : 1;
+
+    $ID = 1;
     $SQL = "SELECT * FROM kisiler ORDER BY id desc";
+    if(isset($_GET['id'])) {
+     $ID = intval($_GET['id']);
+     $SQL = "SELECT * FROM kisiler WHERE id = '{$ID}' ORDER BY id desc";
+    }
+
     $SORGU = $DB->prepare($SQL);
     $SORGU->execute();    
     $cevap['mesaj'] = "Select başarılı";
     $rows = $SORGU->fetchAll(PDO::FETCH_ASSOC);
-
+    
     echo json_encode($rows, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
     break;  
     

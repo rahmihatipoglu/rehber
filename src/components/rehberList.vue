@@ -1,6 +1,9 @@
 <script setup>
 import { ref, reactive, onMounted } from 'vue'
-//import { router } from "vue-router"
+import { useRouter } from "vue-router"
+//import { router } from "@/router"
+
+const router = useRouter();
 
 const CEVAP = reactive({ rehber: [] })
 const myIslem = ref('');
@@ -12,17 +15,22 @@ const myEdit = reactive({
   }
 })
 function getDataRehber() {
-  //fetch('http://localhost/vue_dersleri/api.php?method=get.rehber')
   fetch('http://localhost/rehber/public/api/api.php')
     .then((response) => response.json())
     .then((data) => (CEVAP.rehber = data))
 }
 
+
+const editItem = (id) => {
+  // Düzenleme sayfasına yönlendirme yap
+  router.push(`/edit/${id}`);
+
+
+}
 onMounted(() => {
   getDataRehber()
-
-})
-
+}
+)
 
 </script>
 
@@ -51,11 +59,12 @@ onMounted(() => {
           <tbody>
             <tr v-for=" i in CEVAP.rehber" :key="i.id">
               <td nowrap>
-                <a href="#top" role="button" @click="myEdit.user = i; myIslem = 'update'">{{ i.id }}</a>
+                <a href="#top" role="button" @click="myEdit.user = i; myIslem = 'update'">{{ i.id }}</a>&nbsp;
+                <button @click="editItem(i.id)" class="secondary"> {{ i.id }} [Düzelt]</button>
               </td>
-              <td nowrap>{{ i.ad }}</td>
-              <td nowrap>{{ i.telefon }}</td>
-              <td><a href="#top" role="button" class="secondary" @click="myEdit.user = i; myIslem = 'delete'">Sil</a>
+              <td nowrap> {{ i.ad }}</td>
+              <td nowrap> {{ i.telefon }}</td>
+              <td> <a href=" #top" role="button" class="secondary" @click="myEdit.user = i; myIslem = 'delete'">Sil</a>
               </td>
             </tr>
           </tbody>
