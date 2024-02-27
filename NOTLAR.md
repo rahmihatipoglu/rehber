@@ -46,3 +46,5 @@ const myProps = defineProps(['zemin', 'yazi', 'isim'])
 </template>
 
 ```
+
+Bu proje Windows ortamına port edildi.
