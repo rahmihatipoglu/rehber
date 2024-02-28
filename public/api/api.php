@@ -58,8 +58,6 @@ switch ($islem) {
     
     default:
     
-    // $ID = (isset($_GET['id'])) ? $_GET['id'] : 1;
-
     $ID = 1;
     $SQL = "SELECT * FROM kisiler ORDER BY id desc";
     if(isset($_GET['id'])) {
@@ -71,9 +69,8 @@ switch ($islem) {
     $SORGU->execute();    
     $cevap['mesaj'] = "Select başarılı";
     $rows = $SORGU->fetchAll(PDO::FETCH_ASSOC);
-    
+    // Bitti    
     echo json_encode($rows, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
-    break;  
     
   }
 
