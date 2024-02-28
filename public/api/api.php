@@ -46,6 +46,20 @@ switch ($islem) {
       echo json_encode($cevap, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
       break;
 
+      case 'sillll':
+        $SQL = "INSERT INTO kisiler SET 
+                ad      = :ad, 
+                telefon = :telefon";
+        $SORGU = $DB->prepare($SQL);
+        $SORGU->bindParam(':ad',      $arrGelen['adi']);
+        $SORGU->bindParam(':telefon', $arrGelen['telefonu']);
+        $SORGU->execute();    
+        $cevap['mesaj'] = "Kayıt başarılı";
+        
+        echo json_encode($cevap, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
+        break;
+    
+    
   case 'delete':
     $SQL = "DELETE FROM kisiler WHERE id = :id";
     $SORGU = $DB->prepare($SQL);
