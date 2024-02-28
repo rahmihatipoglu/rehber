@@ -7,7 +7,7 @@ import rehberSearch from '@/components/rehberSearch.vue'
 import { createApp } from 'vue'
 import { createPinia } from 'pinia'
 
-import '@/../node_modules/@picocss/pico/css/pico.pink.min.css'
+import '@/../node_modules/@picocss/pico/css/pico.amber.css'
 
 import App from './App.vue'
 import router from './router'
